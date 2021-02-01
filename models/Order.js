@@ -1,10 +1,10 @@
 const { Schema, model, Types } = require('mongoose')
 
 const schema = new Schema({
-  // id: { type: Types.ObjectId, unique: true },
   date: { type: Date, default: Date.now },
+  status: String,
   sum: Number,
-  store: Object,
+  cart: { type: Array },
   owner: { type: Types.ObjectId, ref: 'User' },
 })
 
