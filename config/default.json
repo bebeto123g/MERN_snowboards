@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "mongoUri": "mongodb+srv://PisinAdmin:123456qwerty@cluster0.pfxej.mongodb.net/app?retryWrites=true&w=majority",
+  "jwtSecretKey": "PuppaSecretKey"
+}

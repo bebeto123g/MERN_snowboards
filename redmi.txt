@@ -1,0 +1,36 @@
+npm init
+npm i express mongoose
+npm i -D nodemon concurrently
+npm i config
+
+MONGODB: mongoose как раз для него
+connect - метод для подклчючения к базе данных
+возвращает промис
+
+concurrently - для запуска сервера бэк и фронт командой dev
+nodemon - для перезагрузки сервера в режиме разработчика
+config - выносим константы в отдельный модуль
+
+на монго сайте:
+1. Context => New Project => Name => Create
+2. Build Claster => Starter => Create
+3. connect => dbUser "Pisin" dbPassword 123456qwerty
+4. method => connect application => copy to config
+
+
+npm i bcryptjs
+шифруем пароли
+
+npm i express-validator
+валидируем логин и пароль
+
+npm i jsonwebtoken
+
+
+
+
+FIXME - структура на сервере: попробовать mobx, вернуться к Лаврику
+TODO - авторизация в модалке, делаем сперва магазин
+TODO - local storage для корзины и token
+TODO - на клиенте изменения в БД по количеству товара, данных профиля, просмотр старых заказов
+TODO - на админке изменения, удаления и добавления товаров, брэндов, пользователей и их заказов
