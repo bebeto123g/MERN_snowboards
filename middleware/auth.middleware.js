@@ -16,12 +16,10 @@ module.exports = (request, response, next) => {
       return
     }
 
-    const decoded = jwt.verify(token, config.get('jwtSecretKey'))
-
-    request.user = decoded
+    request.user = jwt.verify(token, config.get('jwtSecretKey'))
 
     next()
   } catch (e) {
-    response.status(401).json({ message: `Нет авторизации из middleware` })
+    response.status(401).json({ message: `Проблемы авторизации` })
   }
 }

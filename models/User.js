@@ -4,9 +4,10 @@ const schema = new Schema({
   email: { type: String, required: true, unique: true },
   // строка, обязательное, уникальное
   password: { type: String, required: true },
-  orders: [{ type: Types.ObjectId, ref: 'Order' }],
-  profile: { type: Object, ref: 'Profile' }
-  // тип заказы - массив, реф - к какой коллекции модели мы привязываемся
+  // orders: [{ type: Types.ObjectId, ref: 'Order' }],
+  dateRegister: { type: Date, default: Date.now },
+  userName: { type: String },
+  tel: { type: String },
 })
 
 module.exports = model('User', schema)

@@ -30,7 +30,7 @@ router.post(
         })
       }
 
-      const { email, password } = request.body
+      const { email, password, userName, tel } = request.body
 
       // проверка на уникальность
       const candidate = await User.findOne({ email })
@@ -44,7 +44,8 @@ router.post(
 
       // кандидата нет, то шифруем пароль bcryptjs
       const hashedPassword = await bcrypt.hash(password, 12)
-      const user = new User({ email, password: hashedPassword })
+
+      const user = new User({ email, password: hashedPassword, userName, tel })
 
       // сохраняем нового юзера
       await user.save()
@@ -53,13 +54,17 @@ router.post(
         expiresIn: '1h',
       })
 
-      response
-        .status(201)
-        .json({
-          message: `Пользователь зарегестрирован`,
-          token,
-          userId: user.id,
-        })
+      response.status(201).json({
+        message: `Пользователь зарегестрирован`,
+        token,
+        userId: user.id,
+        profile: {
+          email: user.email,
+          name: user.userName,
+          tel: user.tel,
+          register: user.dateRegister
+        }
+      })
     } catch (e) {
       response.status(500).json({ message: 'Неожиданная оказия на сервере!' })
     }
@@ -120,7 +125,14 @@ router.post(
         token,
         userId: user.id,
         message: `Вы успешно вошли в систему!`,
+        profile: {
+          email: user.email,
+          name: user.userName,
+          tel: user.tel,
+          register: +user.dateRegister
+        }
       })
+
     } catch (e) {
       response.status(500).json({ message: 'Неожиданная оказия на сервере!' })
     }
