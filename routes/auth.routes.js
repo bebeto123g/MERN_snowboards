@@ -45,7 +45,13 @@ router.post(
       // кандидата нет, то шифруем пароль bcryptjs
       const hashedPassword = await bcrypt.hash(password, 12)
 
-      const user = new User({ email, password: hashedPassword, userName, tel })
+      const user = new User({
+        email,
+        password: hashedPassword,
+        userName,
+        tel,
+        root: 'user',
+      })
 
       // сохраняем нового юзера
       await user.save()
@@ -62,8 +68,9 @@ router.post(
           email: user.email,
           name: user.userName,
           tel: user.tel,
-          register: user.dateRegister
-        }
+          register: user.dateRegister,
+        },
+        root: user.root
       })
     } catch (e) {
       response.status(500).json({ message: 'Неожиданная оказия на сервере!' })
@@ -129,10 +136,10 @@ router.post(
           email: user.email,
           name: user.userName,
           tel: user.tel,
-          register: +user.dateRegister
-        }
+          register: +user.dateRegister,
+        },
+        root: user.root,
       })
-
     } catch (e) {
       response.status(500).json({ message: 'Неожиданная оказия на сервере!' })
     }
