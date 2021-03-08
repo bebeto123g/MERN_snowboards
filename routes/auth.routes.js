@@ -138,7 +138,8 @@ router.post(
           tel: user.tel,
           register: +user.dateRegister,
         },
-        root: user.root,
+        root: user.root
+       
       })
     } catch (e) {
       response.status(500).json({ message: 'Неожиданная оказия на сервере!' })

@@ -8,6 +8,7 @@ const schema = new Schema({
   dateRegister: { type: Date, default: Date.now },
   userName: { type: String },
   tel: { type: String },
+  root: { type: String }
 })
 
 module.exports = model('User', schema)

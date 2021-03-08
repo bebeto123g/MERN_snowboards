@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const Order = require('../models/Order')
-const auth = require('../middleware/auth.middleware')
+const auth = require('../middleware/authUser.middleware')
 const config = require('config')
 
 const router = Router()
@@ -56,17 +56,21 @@ router.put('/:id', auth, async (request, response) => {
 
     const { type } = request.body
 
-    if (type === 'undo') {
-      order.status = 'Заказ отменен'
-    } else if (type === 'resume') {
-      order.status = 'В обработке...'
-    } else {
-      throw new Error()
+    switch (type) {
+      case 'undo':
+        order.status = 'Заказ отменен'
+        break
+
+      case 'resume':
+        order.status = 'В обработке...'
+        break
+
+      default:
+        throw new Error()
     }
 
     await order.save()
-    response.status(201).json({status: order.status})
-    
+    response.status(201).json({ status: order.status })
   } catch (e) {
     response.status(500).json({ message: `Непредвиденная оказия на сервере!` })
   }
