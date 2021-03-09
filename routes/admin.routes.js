@@ -1,20 +1,22 @@
 const { Router } = require('express')
 const config = require('config')
 
+const getListManager = require('./adminRoutes/gitListManager')
+const getDetailManager = require('./adminRoutes/getDetailManager')
+const postAddManager = require('./adminRoutes/postAddManager')
+const deleteManager = require('./adminRoutes/deleteManager')
+
 const router = Router()
 
-// get
-// TODO: получение списка манагеров
-// TODO: получение деталей аккаунта манагера
+// middleware для проверки auth данных и выкидывания ошибки
 
-// post
-// TODO: добавление манагера и его вида
-// TODO: middleware для проверки данных и выкидывания ошибки
+router.get('/list-manager', 'middleware', getListManager)
+router.get('/manager/:id', 'middleware', getDetailManager)
 
-// put
-// TODO: изменение вида манагера и прочих его данных
+router.post('/manager/add', 'middleware', postAddManager)
 
-// delete
-// TODO: удаление учетных данных манагеро
+router.put('/manager/put/:id', 'middleware', putDetailManager)
+
+router.delete('/manager/delete/:id', 'middleware', deleteManager)
 
 module.exports = router
